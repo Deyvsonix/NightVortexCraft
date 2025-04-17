@@ -65,31 +65,36 @@
     <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
 
-<script>
-  const serverIP = "vortexnightcraft.myvnc.com";
+const server1IP = "vortexnightcraft.myvnc.com";
 
-  fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data); // 👈 Dodaj to żeby zobaczyć pełną odpowiedź w konsoli
+fetch(`https://api.mcsrvstat.us/2/${server1IP}`)
+  .then(response => response.json())
+  .then(data => {
+    if (data.online) {
+      const playerCount = data.players && data.players.online !== undefined
+        ? data.players.online
+        : "brak danych";
 
-      if (data.online) {
-        // Sprawdź czy pole 'players' istnieje i czy ma wartość
-        const playerCount = data.players && data.players.online !== undefined ? data.players.online : "brak danych";
-
-        document.getElementById("status").innerHTML =
-          `🟢 Serwer online – ${playerCount} graczy`;
-      } else {
-        document.getElementById("status").innerHTML =
-          `🔴 Serwer offline`;
-      }
-    })
-    .catch(err => {
-      console.error("Błąd:", err);
       document.getElementById("status").innerHTML =
-        `⚠️ Nie udało się pobrać statusu`;
-    });
-${serverIP}
+        `🟢 Serwer online – ${playerCount} graczy`;
 
+      // MOTD
+      const motdElement = document.getElementById("motd");
+      if (data.motd && data.motd.clean) {
+        motdElement.innerHTML = `📢 ${data.motd.clean.join("<br>")}`;
+      } else {
+        motdElement.innerHTML = `📢 MOTD niedostępny`;
+      }
+
+    } else {
+      document.getElementById("status").innerHTML =
+        `🔴 Serwer offline`;
+    }
+  })
+  .catch(err => {
+    console.error("Błąd:", err);
+    document.getElementById("status").innerHTML =
+      `⚠️ Nie udało się pobrać statusu`;
+  });
 
 
