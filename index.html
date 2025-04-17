@@ -75,48 +75,53 @@
   <script>
     const serverIP = "vortexnightcraft.myvnc.com";
 
-    // Pobieranie danych z API
-    fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Sprawdzanie pełnej odpowiedzi w konsoli
+    // Funkcja do pobierania i aktualizowania statusu serwera oraz MOTD
+    function updateServerStatus() {
+      // Pobieranie danych z API
+      fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data); // Sprawdzanie pełnej odpowiedzi w konsoli
 
-        if (data.online) {
-          const playerCount = data.players && data.players.online !== undefined
-            ? data.players.online
-            : "brak danych"; // Sprawdzanie liczby graczy
+          if (data.online) {
+            const playerCount = data.players && data.players.online !== undefined
+              ? data.players.online
+              : "brak danych"; // Sprawdzanie liczby graczy
 
-          // Wyświetlanie statusu serwera
-          document.getElementById("status").innerHTML =
-            `🟢 Serwer online – ${playerCount} graczy`;
+            // Wyświetlanie statusu serwera
+            document.getElementById("status").innerHTML =
+              `🟢 Serwer online – ${playerCount} graczy`;
 
-          // Wyświetlanie MOTD
-          const motdElement = document.getElementById("motd");
-          if (data.motd && data.motd.clean) {
-            motdElement.innerHTML = `📢 ${data.motd.clean.join("<br>")}`;
+            // Wyświetlanie MOTD
+            const motdElement = document.getElementById("motd");
+            if (data.motd && data.motd.clean) {
+              motdElement.innerHTML = `📢 ${data.motd.clean.join("<br>")}`;
+            } else {
+              motdElement.innerHTML = `📢 MOTD niedostępny`;
+            }
+
           } else {
-            motdElement.innerHTML = `📢 MOTD niedostępny`;
+            document.getElementById("status").innerHTML =
+              `🔴 Serwer offline`;
           }
-
-        } else {
+        })
+        .catch(err => {
+          console.error("Błąd:", err);
           document.getElementById("status").innerHTML =
-            `🔴 Serwer offline`;
-        }
-      })
-      .catch(err => {
-        console.error("Błąd:", err);
-        document.getElementById("status").innerHTML =
-          `⚠️ Nie udało się pobrać statusu`;
-      });
+            `⚠️ Nie udało się pobrać statusu`;
+        });
+    }
 
-    // Odśwież stronę co 30 sekund (30000 ms)
-    setInterval(function() {
-      location.reload();  // Funkcja odświeżająca stronę
-    }, 30000);  // 30000 ms = 30 sekund
+    // Pierwsze załadowanie statusu przy załadowaniu strony
+    updateServerStatus();
+
+    // Odświeżenie tylko statusu i MOTD co 30 sekund
+    setInterval(updateServerStatus, 30000);  // 30000 ms = 30 sekund
   </script>
 
 </body>
 </html>
+
 
 
 
