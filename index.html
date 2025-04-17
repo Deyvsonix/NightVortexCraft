@@ -1,29 +1,8 @@
-<p id="status">🔄 Sprawdzanie statusu serwera...</p>
-
-<script>
-  const serverIP = "vortexnightcraft.myvnc.com"; // ← np. play.twojserwer.pl
-
-  fetch(`https://api.mcsrvstat.us/2/${vortexnightcraft.myvnc.com}`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.online) {
-        document.getElementById("status").innerHTML =
-          `🟢 Serwer online – ${data.players.online} graczy`;
-      } else {
-        document.getElementById("status").innerHTML =
-          `🔴 Serwer offline`;
-      }
-    })
-    .catch(err => {
-      document.getElementById("status").innerHTML =
-        `⚠️ Nie udało się pobrać statusu`;
-    });
-</script>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>{{Nazwa serwera}}</title>
+  <title>VortexNightCraft</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -74,14 +53,36 @@
 </head>
 <body>
   <div class="overlay">
-    <img src="{{link do logo}}" alt="Logo serwera" class="logo">
-    <h1>{{Nazwa serwera}}</h1>
-    <p class="ip">🌍 IP: <strong>{{IP serwera}}</strong></p>
-    <p>🧱 Wersja: <strong>{{Wersja Minecraft}}</strong></p>
+    <img src="logo.png" alt="Logo serwera" class="logo">
+    <h1>VortexNightCraft</h1>
+    <p class="ip">🌍 IP: <strong>vortexnightcraft.myvnc.com</strong></p>
+    <p>🧱 Wersja: <strong>1.20+</strong></p>
+    <p id="status">🔄 Sprawdzanie statusu serwera...</p>
+
     <div class="info">
-      <p>{{Krótki opis serwera np. "Survival + gildie, bez lagów, ekonomia, stałe eventy!"}}</p>
+      <p>Survival + gildie, ekonomia, eventy, aktywna administracja – zapraszamy!</p>
     </div>
-    <a class="btn" href="{{Link do Discorda}}" target="_blank">🎮 Dołącz do Discorda</a>
+    <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
+
+  <script>
+    const serverIP = "vortexnightcraft.myvnc.com";
+
+    fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.online) {
+          document.getElementById("status").innerHTML =
+            `🟢 Serwer online – ${data.players.online} graczy`;
+        } else {
+          document.getElementById("status").innerHTML =
+            `🔴 Serwer offline`;
+        }
+      })
+      .catch(err => {
+        document.getElementById("status").innerHTML =
+          `⚠️ Nie udało się pobrać statusu`;
+      });
+  </script>
 </body>
 </html>
