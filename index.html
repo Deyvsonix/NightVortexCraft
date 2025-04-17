@@ -3,7 +3,7 @@
 <script>
   const serverIP = "{{vortexnightcraft.myvnc.com}}"; // ← np. play.twojserwer.pl
 
-  fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+  fetch(`https://api.mcsrvstat.us/2/${vortexnightcraft.myvnc.com}`)
     .then(response => response.json())
     .then(data => {
       if (data.online) {
