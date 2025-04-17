@@ -71,20 +71,22 @@
   const serverIP = "vortexnightcraft.myvnc.com"; // Twój adres serwera
 
   fetch(`https://mcsrvstat.us/server/Vortexnightcraft.myvnc.com`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.online) {
+      .then(response => response.json())
+      .then(data => {
+        if (data.online) {
+          document.getElementById("status").innerHTML =
+            `🟢 Serwer online – ${data.players.now} graczy`;
+        } else {
+          document.getElementById("status").innerHTML =
+            `🔴 Serwer offline`;
+        }
+      })
+      .catch(err => {
         document.getElementById("status").innerHTML =
-          `🟢 Serwer online – ${data.players.now} graczy`;
-      } else {
-        document.getElementById("status").innerHTML =
-          `🔴 Serwer offline`;
-      }
-    })
-    .catch(err => {
-      console.error("Błąd podczas pobierania statusu:", err);  // Logowanie błędu w konsoli
-      document.getElementById("status").innerHTML =
-        `⚠️ Nie udało się pobrać statusu`;
-    });
+          `⚠️ Nie udało się pobrać statusu`;
+      });
+  </script>
+</body>
+</html>
 </script>
 
