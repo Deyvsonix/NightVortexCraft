@@ -65,26 +65,31 @@
     <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
 
-  <script>
-    const serverIP = "vortexnightcraft.myvnc.com";  // Twój adres serwera
+<script>
+  const serverIP = "vortexnightcraft.myvnc.com";
 
-    fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.online) {
-          document.getElementById("status").innerHTML =
-            `🟢 Serwer online – ${data.players.now} graczy`;
-        } else {
-          document.getElementById("status").innerHTML =
-            `🔴 Serwer offline`;
-        }
-      })
-      .catch(err => {
+  fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // 👈 Dodaj to żeby zobaczyć pełną odpowiedź w konsoli
+
+      if (data.online) {
+        // Sprawdź czy pole 'players' istnieje i czy ma wartość
+        const playerCount = data.players && data.players.online !== undefined ? data.players.online : "brak danych";
+
         document.getElementById("status").innerHTML =
-          `⚠️ Nie udało się pobrać statusu`;
-      });
-  </script>
-</body>
-</html>
+          `🟢 Serwer online – ${playerCount} graczy`;
+      } else {
+        document.getElementById("status").innerHTML =
+          `🔴 Serwer offline`;
+      }
+    })
+    .catch(err => {
+      console.error("Błąd:", err);
+      document.getElementById("status").innerHTML =
+        `⚠️ Nie udało się pobrać statusu`;
+    });
+</script>
+
 
 
