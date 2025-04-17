@@ -90,6 +90,28 @@
         `⚠️ Nie udało się pobrać statusu`;
     });
 </script>
+<p id="motd">🔄 Pobieranie MOTD...</p>
+
+<script>
+  const serverIP = "Vortexnightcraft.myvnc.com";
+
+  fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.online && data.motd && data.motd.clean) {
+        document.getElementById("motd").innerHTML =
+          `📢 MOTD: ${data.motd.clean.join(" ")}`;
+      } else {
+        document.getElementById("motd").innerHTML =
+          `❌ Brak MOTD lub serwer offline`;
+      }
+    })
+    .catch(err => {
+      console.error("Błąd podczas pobierania MOTD:", err);
+      document.getElementById("motd").innerHTML =
+        `⚠️ Nie udało się pobrać MOTD`;
+    });
+</script>
 
 
 
