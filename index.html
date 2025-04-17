@@ -5,6 +5,14 @@
   <title>VortexNightCraft</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://rare-gallery.com/thumbnail/423893-Minecraft-Shader-shaders-sunset-reflection-snow.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
     .overlay {
       background-color: rgba(0,0,0,0.7);
       padding: 50px 20px;
@@ -50,7 +58,6 @@
 </head>
 <body>
   <div class="overlay">
-    <img src="https://cdn.pixabay.com/photo/2016/06/20/16/43/minecraft-1469255_1280.png" alt="Logo serwera" class="logo">
     <h1>VortexNightCraft</h1>
     <p class="ip">🌍 IP: <strong>vortexnightcraft.myvnc.com</strong></p>
     <p>🧱 Wersja: <strong>1.20+</strong></p>
@@ -70,7 +77,7 @@
     // Funkcja do pobierania i aktualizowania statusu serwera oraz MOTD
     function updateServerStatus() {
       // Pobieranie danych z API
-      fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+      fetch(https://api.mcsrvstat.us/2/${serverIP})
         .then(response => response.json())
         .then(data => {
           console.log(data); // Sprawdzanie pełnej odpowiedzi w konsoli
@@ -82,25 +89,25 @@
 
             // Wyświetlanie statusu serwera
             document.getElementById("status").innerHTML =
-              `🟢 Serwer online – ${playerCount} graczy`;
+              🟢 Serwer online – ${playerCount} graczy;
 
             // Wyświetlanie MOTD
             const motdElement = document.getElementById("motd");
             if (data.motd && data.motd.clean) {
-              motdElement.innerHTML = `📢 ${data.motd.clean.join("<br>")}`;
+              motdElement.innerHTML = 📢 ${data.motd.clean.join("<br>")};
             } else {
-              motdElement.innerHTML = `📢 MOTD niedostępny`;
+              motdElement.innerHTML = 📢 MOTD niedostępny;
             }
 
           } else {
             document.getElementById("status").innerHTML =
-              `🔴 Serwer offline`;
+              🔴 Serwer offline;
           }
         })
         .catch(err => {
           console.error("Błąd:", err);
           document.getElementById("status").innerHTML =
-            `⚠️ Nie udało się pobrać statusu`;
+            ⚠️ Nie udało się pobrać statusu;
         });
     }
 
