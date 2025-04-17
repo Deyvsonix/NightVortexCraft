@@ -1,13 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Mój serwer Minecraft</title>
+  <title>{{Nazwa serwera}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://wallpapercave.com/wp/wp2757874.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+    .overlay {
+      background-color: rgba(0,0,0,0.7);
+      padding: 50px 20px;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+    .ip {
+      font-size: 1.5em;
+      margin: 10px 0;
+    }
+    .info {
+      max-width: 600px;
+      margin: auto;
+      font-size: 1.2em;
+    }
+    .btn {
+      background: #2ecc71;
+      color: white;
+      padding: 15px 25px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: inline-block;
+      font-size: 1.1em;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #27ae60;
+    }
+    img.logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
-<body style="font-family:sans-serif; text-align:center; background:#1e1e1e; color:white;">
-  <h1>Witaj na naszym serwerze Minecraft!</h1>
-  <p>🌍 IP: <strong>play.twojserwer.pl</strong></p>
-  <p>🧱 Wersja: 1.20.4</p>
-  <p>📜 Regulamin, screeny i więcej informacji wkrótce!</p>
+<body>
+  <div class="overlay">
+    <img src="{{link do logo}}" alt="Logo serwera" class="logo">
+    <h1>{{Nazwa serwera}}</h1>
+    <p class="ip">🌍 IP: <strong>{{IP serwera}}</strong></p>
+    <p>🧱 Wersja: <strong>{{Wersja Minecraft}}</strong></p>
+    <div class="info">
+      <p>{{Krótki opis serwera np. "Survival + gildie, bez lagów, ekonomia, stałe eventy!"}}</p>
+    </div>
+    <a class="btn" href="{{Link do Discorda}}" target="_blank">🎮 Dołącz do Discorda</a>
+  </div>
 </body>
 </html>
