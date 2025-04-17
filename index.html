@@ -45,10 +45,6 @@
     .btn:hover {
       background: #27ae60;
     }
-    img.logo {
-      max-width: 200px;
-      margin-bottom: 20px;
-    }
     #motd {
       font-size: 1.2em;
       margin-top: 20px;
@@ -63,7 +59,7 @@
     <p>🧱 Wersja: <strong>1.20+</strong></p>
     <p id="status">🔄 Sprawdzanie statusu serwera...</p>
 
-    <div id="motd"></div> <!-- Tutaj wyświetli się MOTD -->
+    <div id="motd"></div>
 
     <div class="info">
       <p>Survival + gildie, ekonomia, eventy, aktywna administracja – zapraszamy!</p>
@@ -74,51 +70,38 @@
   <script>
     const serverIP = "vortexnightcraft.myvnc.com";
 
-    // Funkcja do pobierania i aktualizowania statusu serwera oraz MOTD
     function updateServerStatus() {
-      // Pobieranie danych z API
-      fetch(https://api.mcsrvstat.us/2/${serverIP})
+      fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data); // Sprawdzanie pełnej odpowiedzi w konsoli
+          console.log(data);
 
           if (data.online) {
-            const playerCount = data.players && data.players.online !== undefined
-              ? data.players.online
-              : "brak danych"; // Sprawdzanie liczby graczy
-
-            // Wyświetlanie statusu serwera
+            const playerCount = data.players?.online ?? "brak danych";
             document.getElementById("status").innerHTML =
-              🟢 Serwer online – ${playerCount} graczy;
+              `🟢 Serwer online – ${playerCount} graczy`;
 
-            // Wyświetlanie MOTD
             const motdElement = document.getElementById("motd");
-            if (data.motd && data.motd.clean) {
-              motdElement.innerHTML = 📢 ${data.motd.clean.join("<br>")};
+            if (data.motd?.clean) {
+              motdElement.innerHTML = `📢 ${data.motd.clean.join("<br>")}`;
             } else {
-              motdElement.innerHTML = 📢 MOTD niedostępny;
+              motdElement.innerHTML = `📢 MOTD niedostępny`;
             }
-
           } else {
             document.getElementById("status").innerHTML =
-              🔴 Serwer offline;
+              `🔴 Serwer offline`;
           }
         })
         .catch(err => {
           console.error("Błąd:", err);
           document.getElementById("status").innerHTML =
-            ⚠️ Nie udało się pobrać statusu;
+            `⚠️ Nie udało się pobrać statusu`;
         });
     }
 
-    // Pierwsze załadowanie statusu przy załadowaniu strony
     updateServerStatus();
-
-    // Odświeżenie statusu co 30 sekund
-    setInterval(function() {
-      updateServerStatus(); // Ponowne wywołanie funkcji, aby pobrać nowe dane
-    }, 5000);  // 5000 ms = 5 sekund
+    setInterval(updateServerStatus, 5000);
   </script>
-
 </body>
 </html>
+
