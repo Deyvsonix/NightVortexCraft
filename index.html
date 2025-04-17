@@ -57,9 +57,7 @@
     <h1>VortexNightCraft</h1>
     <p class="ip">🌍 IP: <strong>vortexnightcraft.myvnc.com</strong></p>
     <p>🧱 Wersja: <strong>1.20+</strong></p>
-
     <p id="status">🔄 Sprawdzanie statusu serwera...</p>
-    <p id="motd">🔄 Pobieranie MOTD...</p>
 
     <div class="info">
       <p>Survival + gildie, ekonomia, eventy, aktywna administracja – zapraszamy!</p>
@@ -67,43 +65,37 @@
     <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
 
-  <script>
-    const serverIP = "vortexnightcraft.myvnc.com";
+<script>
+  const serverIP = "vortexnightcraft.myvnc.com";
 
-    // Pobieranie danych z API
-    fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Sprawdzanie pełnej odpowiedzi w konsoli
+  fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // 👈 Dodaj to żeby zobaczyć pełną odpowiedź w konsoli
 
-        if (data.online) {
-          const playerCount = data.players && data.players.online !== undefined
-            ? data.players.online
-            : "brak danych"; // Sprawdzanie liczby graczy
+      if (data.online) {
+        // Sprawdź czy pole 'players' istnieje i czy ma wartość
+        const playerCount = data.players && data.players.online !== undefined ? data.players.online : "brak danych";
 
-          // Wyświetlanie statusu serwera
-          document.getElementById("status").innerHTML =
-            `🟢 Serwer online – ${playerCount} graczy`;
-
-          // Wyświetlanie MOTD
-          const motdElement = document.getElementById("motd");
-          if (data.motd && data.motd.clean) {
-            motdElement.innerHTML = `📢 ${data.motd.clean.join("<br>")}`;
-          } else {
-            motdElement.innerHTML = `📢 MOTD niedostępny`;
-          }
-
-        } else {
-          document.getElementById("status").innerHTML =
-            `🔴 Serwer offline`;
-        }
-      })
-      .catch(err => {
-        console.error("Błąd:", err);
         document.getElementById("status").innerHTML =
-          `⚠️ Nie udało się pobrać statusu`;
-      });
-  </script>
+          `🟢 Serwer online – ${playerCount} graczy`;
+      } else {
+        document.getElementById("status").innerHTML =
+          `🔴 Serwer offline`;
+      }
+    })
+    .catch(err => {
+      console.error("Błąd:", err);
+      document.getElementById("status").innerHTML =
+        `⚠️ Nie udało się pobrać statusu`;
+    });
+
+  // Odśwież stronę co 30 sekund (30000 ms)
+  setInterval(function() {
+    location.reload();  // Funkcja odświeżająca stronę
+  }, 30000);  // 30000 ms = 30 sekund
+</script>
+
 </body>
 </html>
 
