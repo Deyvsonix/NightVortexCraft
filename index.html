@@ -70,13 +70,11 @@
 <script>
   const serverIP = "vortexnightcraft.myvnc.com"; // Twój adres serwera
 
-  // Zmiana na API ismcserver.online
   fetch(`https://ismcserver.online/vortexnightcraft.myvnc.com`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);  // Zobacz odpowiedź w konsoli
+      console.log(data);  // Zaloguj pełną odpowiedź w konsoli
 
-      // Sprawdzanie statusu serwera
       if (data.online) {
         document.getElementById("status").innerHTML =
           `🟢 Serwer online – ${data.players.now} graczy`;
@@ -86,7 +84,7 @@
       }
     })
     .catch(err => {
-      console.error("Błąd podczas pobierania statusu:", err);
+      console.error("Błąd podczas pobierania statusu:", err);  // Logowanie błędu w konsoli
       document.getElementById("status").innerHTML =
         `⚠️ Nie udało się pobrać statusu`;
     });
