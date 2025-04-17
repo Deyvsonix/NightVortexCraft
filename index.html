@@ -65,15 +65,16 @@
     <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
 
-<p id="status">🔄 Sprawdzanie statusu serwera...</p>
-
 <script>
   const serverIP = "vortexnightcraft.myvnc.com"; // Twój adres serwera
 
-  fetch(`https://ismcserver.online/vortexnightcraft.myvnc.com`)
-    .then(response => response.json())
+  fetch(`https://ismcserver.online/${serverIP}`)
+    .then(response => {
+      console.log(response);  // Logujemy odpowiedź przed parsowaniem JSON
+      return response.json();
+    })
     .then(data => {
-      console.log(data);  // Zaloguj pełną odpowiedź w konsoli
+      console.log(data);  // Logujemy dane odpowiedzi w konsoli
 
       if (data.online) {
         document.getElementById("status").innerHTML =
