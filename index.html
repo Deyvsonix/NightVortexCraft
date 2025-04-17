@@ -65,24 +65,28 @@
     <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
 
-<script>
-  const serverIP = "vortexnightcraft.myvnc.com";
+<p id="status">🔄 Sprawdzanie statusu serwera...</p>
 
-  fetch(`https://api.mcsrvstat.us/2/vortexnightcraft.myvnc.com`)
+<script>
+  const serverIP = "vortexnightcraft.myvnc.com"; // Twój adres serwera
+
+  // Zmiana na API ismcserver.online
+  fetch(`https://ismcserver.online/vortexnightcraft.myvnc.com`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);  // Dodajemy logowanie odpowiedzi w konsoli
+      console.log(data);  // Zobacz odpowiedź w konsoli
 
+      // Sprawdzanie statusu serwera
       if (data.online) {
         document.getElementById("status").innerHTML =
-          `🟢 Serwer online test – ${data.players.online} graczy`;
+          `🟢 Serwer online – ${data.players.now} graczy`;
       } else {
         document.getElementById("status").innerHTML =
           `🔴 Serwer offline`;
       }
     })
     .catch(err => {
-      console.error("Błąd podczas pobierania statusu:", err);  // Dodajemy logowanie błędu
+      console.error("Błąd podczas pobierania statusu:", err);
       document.getElementById("status").innerHTML =
         `⚠️ Nie udało się pobrać statusu`;
     });
