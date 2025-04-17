@@ -1,3 +1,24 @@
+<p id="status">🔄 Sprawdzanie statusu serwera...</p>
+
+<script>
+  const serverIP = "{{tu_wstaw_ip_serwera}}"; // ← np. play.twojserwer.pl
+
+  fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.online) {
+        document.getElementById("status").innerHTML =
+          `🟢 Serwer online – ${data.players.online} graczy`;
+      } else {
+        document.getElementById("status").innerHTML =
+          `🔴 Serwer offline`;
+      }
+    })
+    .catch(err => {
+      document.getElementById("status").innerHTML =
+        `⚠️ Nie udało się pobrać statusu`;
+    });
+</script>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
