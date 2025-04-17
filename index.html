@@ -115,8 +115,10 @@
     // Pierwsze załadowanie statusu przy załadowaniu strony
     updateServerStatus();
 
-    // Odświeżenie tylko statusu i MOTD co 30 sekund
-    setInterval(updateServerStatus, 30000);  // 30000 ms = 30 sekund
+    // Odświeżenie statusu co 30 sekund
+    setInterval(function() {
+      location.reload(); // Odświeżenie strony
+    }, 5000);  // 5000 ms = 5 sekund
   </script>
 
 </body>
