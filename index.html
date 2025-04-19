@@ -5,35 +5,37 @@
   <title>VortexNightCraft</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url('https://rare-gallery.com/thumbnail/423893-Minecraft-Shader-shaders-sunset-reflection-snow.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
       text-align: center;
     }
+
     .overlay {
       background-color: rgba(0,0,0,0.7);
       padding: 50px 20px;
       min-height: 100vh;
     }
+
     h1 {
       font-size: 3em;
       margin-bottom: 0.2em;
     }
+
     .ip {
       font-size: 1.5em;
       margin: 10px 0;
     }
+
     .info {
       max-width: 600px;
       margin: auto;
       font-size: 1.2em;
     }
+
     .btn {
       background: #2ecc71;
       color: white;
@@ -45,20 +47,42 @@
       font-size: 1.1em;
       transition: background 0.3s;
     }
+
     .btn:hover {
       background: #27ae60;
     }
+
     #motd {
       font-size: 1.2em;
       margin-top: 20px;
       color: #f39c12;
+    }
+
+    /* Nowy styl dla napisu na dole strony */
+    .footer {
+      position: fixed; /* Zawsze na dole ekranu */
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    /* Usunięcie scrollowania */
+    body, html {
+      height: 100%;
+      margin: 0;
+      overflow: hidden; /* Blokuje przewijanie */
     }
   </style>
 </head>
 <body>
   <div class="overlay">
     <h1>VortexNightCraft</h1>
-    <p class="ip">🌍 IP: vortexnightcraft.myvnc.com</strong></p>
+    <p class="ip">🌍 IP: <strong>vortexnightcraft.myvnc.com</strong></p>
     <p>🧱 Wersja: <strong>1.20+</strong></p>
     <p id="status">🔄 Sprawdzanie statusu serwera...</p>
 
@@ -70,9 +94,12 @@
     </div>
     <a class="btn" href="https://discord.gg/twoj-link" target="_blank">🎮 Dołącz do Discorda</a>
   </div>
-<footer style="margin-top: 30px; font-size: 0.9em; opacity: 0.7;">
-  &copy; 2025 VortexNightCraft | Strona by Deyvsonix
-</footer>
+
+  <!-- Dodanie napisu na dole strony -->
+  <div class="footer">
+    <p>VortexNightCraft - Wszystkie prawa zastrzeżone.</p>
+  </div>
+
   <script>
     const serverIP = "vortexnightcraft.myvnc.com";
 
